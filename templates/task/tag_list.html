@@ -19,10 +19,10 @@
               {{ tag.name }}
           </td>
           <td>
-              <Update
+              <a href="{% url 'task:tag-update' pk=tag.id %}">Update</a>
           </td>
           <td>
-            Delete
+            <a href="{% url 'task:tag-delete' pk=tag.id %}">Delete</a>
           </td>
         </tr>
       {% endfor %}
