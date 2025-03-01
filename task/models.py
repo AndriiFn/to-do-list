@@ -14,6 +14,7 @@ class Task(models.Model):
     def __str__(self):
         return self.content
 
+
 class Tag(models.Model):
     name = models.CharField(max_length=255)
 
