@@ -1,5 +1,7 @@
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from gc import get_objects
+
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
@@ -55,3 +57,10 @@ class TaskUpdateView(UpdateView):
 class TaskDeleteView(DeleteView):
     model = Task
     success_url = reverse_lazy("task:index")
+
+
+def change_task_status(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.done = not task.done
+    task.save()
+    return HttpResponseRedirect(reverse_lazy("task:index"))
